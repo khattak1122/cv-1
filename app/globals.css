@@ -1,0 +1,271 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ========================================================
+   TABLE-BASED LAYOUT UTILITIES (html2pdf & jsPDF friendly)
+   ======================================================== */
+.cv-table {
+  display: table !important;
+  width: 100% !important;
+  table-layout: fixed !important;
+  border-collapse: collapse !important;
+  border-spacing: 0 !important;
+}
+
+.cv-table-row, .cv-row {
+  display: table-row !important;
+  width: 100% !important;
+}
+
+.cv-table-cell {
+  display: table-cell !important;
+  vertical-align: top !important;
+}
+
+/* Print-safe page break prevention */
+.page-break-avoid {
+  page-break-inside: avoid !important;
+  break-inside: avoid !important;
+}
+
+/* ========================================================
+   PRINT & PDF EXPORT OPTIMIZATIONS (A4 Portrait Standard)
+   ======================================================== */
+@media print {
+  /* 1. Page size and zero margins for clean A4 printing */
+  @page {
+    size: A4 portrait;
+    margin: 0 !important;
+  }
+
+  html,
+  body {
+    width: 210mm !important;
+    height: 297mm !important;
+    max-height: 297mm !important;
+    min-height: 297mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: #ffffff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  /* Force exact color, gradient, and image printing across all browsers */
+  *,
+  *::before,
+  *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 2. Hide all website navigation, headers, footers, forms, toolbars & modals */
+  nav,
+  header,
+  footer,
+  .no-print,
+  button,
+  .ui-controls,
+  .theme-selector,
+  .hero,
+  .features,
+  .templates,
+  .form-column,
+  .preview-toolbar,
+  [role="dialog"],
+  .modal-backdrop,
+  .download-btn {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+
+  /* Reset layout containers so CV is unclipped and fills the page cleanly */
+  main,
+  section,
+  .builder,
+  .builder-grid,
+  .preview-column,
+  .preview-area,
+  .preview-transform-wrapper,
+  .overflow-x-auto {
+    display: block !important;
+    visibility: visible !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    transform: none !important;
+    -webkit-transform: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    position: static !important;
+    float: none !important;
+    height: 100% !important;
+    min-height: 297mm !important;
+  }
+
+  /* 3. Main CV paper container frame (strict 210mm x 297mm A4) */
+  .cv-paper,
+  .cv-container,
+  #cv-template,
+  .resume-container,
+  #cv,
+  .container {
+    width: 210mm !important;
+    max-width: 210mm !important;
+    height: 297mm !important;
+    max-height: 297mm !important;
+    min-height: 297mm !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    background-color: #ffffff !important;
+    border: none !important;
+    box-shadow: none !important;
+    overflow: hidden !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    page-break-after: avoid !important;
+    page-break-before: avoid !important;
+    page-break-inside: avoid !important;
+    break-after: avoid !important;
+    break-before: avoid !important;
+    break-inside: avoid !important;
+    position: relative !important;
+  }
+
+  /* 4. Display: table & table-cell Layout (Side-by-Side Two Column Architecture) */
+  .full-height-sidebar-layout,
+  #cv.full-height-sidebar-layout,
+  .resume-container.full-height-sidebar-layout {
+    display: table !important;
+    table-layout: fixed !important;
+    width: 210mm !important;
+    max-width: 210mm !important;
+    height: 297mm !important;
+    max-height: 297mm !important;
+    min-height: 297mm !important;
+    border-collapse: collapse !important;
+    border-spacing: 0 !important;
+    padding: 0 !important;
+  }
+
+  .cv-body,
+  .cv-table {
+    display: table !important;
+    table-layout: fixed !important;
+    width: 100% !important;
+    border-collapse: collapse !important;
+    border-spacing: 0 !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .cv-table-row,
+  .cv-row {
+    display: table-row !important;
+    width: 100% !important;
+  }
+
+  /* Left sidebar table-cell (32% width) */
+  .sidebar,
+  .left-column {
+    display: table-cell !important;
+    vertical-align: top !important;
+    width: 32% !important;
+    max-width: 32% !important;
+    min-width: 32% !important;
+    height: 100% !important;
+    box-sizing: border-box !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    float: none !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* Right main-content table-cell (68% width) */
+  .main-content,
+  .right-column {
+    display: table-cell !important;
+    vertical-align: top !important;
+    width: 68% !important;
+    max-width: 68% !important;
+    min-width: 68% !important;
+    height: 100% !important;
+    box-sizing: border-box !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    float: none !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* Full width main content for single column layouts */
+  .main-content.w-full {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    float: none !important;
+  }
+
+  /* Header banner for top-header layouts */
+  #cv .cv-header,
+  .cv-paper .cv-header {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* Prevent page breaks inside any element */
+  * {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Ensure text, tags, badges, images, and headings are 100% visible */
+  #cv *,
+  .cv-paper *,
+  .resume-container * {
+    visibility: visible !important;
+    opacity: 1 !important;
+    word-break: break-word !important;
+  }
+
+  /* Photos */
+  #cv img:not(.hidden),
+  .cv-paper img:not(.hidden) {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  #cv img.hidden,
+  .cv-paper img.hidden {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  #cv #cvPhotoPlaceholder,
+  .cv-paper #cvPhotoPlaceholder {
+    display: flex !important;
+    visibility: visible !important;
+  }
+}

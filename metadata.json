@@ -1,0 +1,6 @@
+{
+  "name": "CVBuilder - Professional CV Creator",
+  "description": "Create and download professional, ATS-friendly CVs and resumes in minutes with live preview and customizable templates.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
