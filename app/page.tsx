@@ -30,13 +30,7 @@ import {
 export default function Home() {
   const [cvData, setCvData] = useState<CVData>(SAMPLE_CV_DATA);
   const [activeTab, setActiveTab] = useState<'form' | 'preview'>('form');
-  const [previewZoom, setPreviewZoom] = useState<number>(() => {
-    if (typeof window !== 'undefined') {
-      if (window.innerWidth < 640) return 50;
-      if (window.innerWidth < 1024) return 75;
-    }
-    return 100;
-  });
+  const [previewZoom, setPreviewZoom] = useState<number>(100);
   const [showPrintModal, setShowPrintModal] = useState<boolean>(false);
   const [isStylesModalOpen, setIsStylesModalOpen] = useState<boolean>(false);
   const [isExportingPdf, setIsExportingPdf] = useState<boolean>(false);
@@ -54,6 +48,7 @@ export default function Home() {
         setPreviewZoom(100);
       }
     };
+    handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -129,36 +124,36 @@ export default function Home() {
       setActiveTab('preview');
       // Reset zoom to 100% for pristine 1:1 pixel rendering during canvas capture
       setPreviewZoom(100);
-      await new Promise(r => setTimeout(r, 120));
+      await new Promise(r => setTimeout(r, 150));
 
-      const html2pdfModule = await import('html2pdf.js');
-      const html2pdf = html2pdfModule.default;
+      const { default: html2canvas } = await import('html2canvas-pro');
+      const { jsPDF } = await import('jspdf');
+
       const cleanFileName = (cvData.name || 'Resume').trim().replace(/[^a-zA-Z0-9_-]/g, '_');
 
-      const opt = {
-        margin: 0,
-        filename: `${cleanFileName}_CV.pdf`,
-        image: { type: 'jpeg' as const, quality: 0.98 },
-        html2canvas: {
-          scale: 2,
-          useCORS: true,
-          letterRendering: true,
-          scrollY: 0,
-          scrollX: 0,
-          windowWidth: 1024,
-        },
-        jsPDF: {
-          unit: 'mm',
-          format: 'a4',
-          orientation: 'portrait' as const,
-        },
-        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
-      };
+      // html2canvas-pro natively parses oklch(), oklab(), and modern CSS colors
+      const canvas = await html2canvas(cvElement, {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        backgroundColor: '#ffffff',
+        windowWidth: 1024,
+      });
 
-      await html2pdf().set(opt).from(cvElement).save();
+      const imgData = canvas.toDataURL('image/jpeg', 0.98);
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: 'a4',
+        compress: true,
+      });
+
+      // Standard A4 dimensions: 210mm x 297mm
+      pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297, undefined, 'FAST');
+      pdf.save(`${cleanFileName}_CV.pdf`);
       setShowPrintModal(false);
     } catch (err) {
-      console.error('html2pdf export failed, falling back to window.print():', err);
+      console.error('PDF export failed, falling back to window.print():', err);
       executePrint();
     } finally {
       setPreviewZoom(previousZoom);

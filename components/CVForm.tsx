@@ -187,6 +187,11 @@ export function CVForm({ data, onChange, onDownload, onDirectPrint, onOpenStyles
     updateField('template', `template-${prevNum}`);
   };
 
+  const showNotice = (msg: string) => {
+    setAiNotice(msg);
+    setTimeout(() => setAiNotice(null), 4000);
+  };
+
   const handleRandomStyle = () => {
     const randNum = Math.floor(Math.random() * 1000) + 1;
     updateField('template', `template-${randNum}`);
@@ -199,7 +204,7 @@ export function CVForm({ data, onChange, onDownload, onDirectPrint, onOpenStyles
       updateField('template', `template-${num}`);
       setTemplateNumberInput('');
     } else {
-      alert('Please enter a template number between 1 and 1000');
+      showNotice('Please enter a template number between 1 and 1000');
     }
   };
 
@@ -207,7 +212,7 @@ export function CVForm({ data, onChange, onDownload, onDirectPrint, onOpenStyles
     const file = e.target.files?.[0];
     if (!file) return;
     if (file.size > 5 * 1024 * 1024) {
-      alert('Photo must be less than 5MB');
+      showNotice('Photo must be less than 5MB');
       return;
     }
     const reader = new FileReader();
@@ -231,18 +236,17 @@ export function CVForm({ data, onChange, onDownload, onDirectPrint, onOpenStyles
   };
 
   const handleClear = () => {
-    if (window.confirm('Are you sure you want to clear all fields?')) {
-      onChange({ ...BLANK_CV_DATA });
-      if (fileInputRef.current) {
-        fileInputRef.current.value = '';
-      }
+    onChange({ ...BLANK_CV_DATA });
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
     }
+    showNotice('All fields cleared. You can load sample data anytime.');
   };
 
   const handleAiEnhance = async (field: 'about' | 'experience') => {
     const currentText = data[field];
     if (!currentText || currentText.trim().length === 0) {
-      alert(`Please write a draft in ${field === 'about' ? 'About Me' : 'Work Experience'} first so the AI can polish it!`);
+      showNotice(`Please write a draft in ${field === 'about' ? 'About Me' : 'Work Experience'} first so the AI can polish it!`);
       return;
     }
 
@@ -267,12 +271,11 @@ export function CVForm({ data, onChange, onDownload, onDirectPrint, onOpenStyles
       const json = await res.json();
       if (json.enhanced) {
         updateField(field, json.enhanced);
-        setAiNotice(`Enhanced ${field === 'about' ? 'About Me' : 'Work Experience'} successfully!`);
-        setTimeout(() => setAiNotice(null), 4000);
+        showNotice(`Enhanced ${field === 'about' ? 'About Me' : 'Work Experience'} successfully!`);
       }
     } catch (err) {
       console.error(err);
-      alert('Could not enhance text right now. Please try again.');
+      showNotice('Could not enhance text right now. Please try again.');
     } finally {
       setAiLoadingField(null);
     }

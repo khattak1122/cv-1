@@ -81,15 +81,19 @@ export function StylesModal({
     onClose();
   };
 
+  const [jumpError, setJumpError] = useState<string | null>(null);
+
   const handleDirectJump = (e: React.FormEvent) => {
     e.preventDefault();
     const num = parseInt(directJumpNumber, 10);
     if (!isNaN(num) && num >= 1 && num <= TOTAL_TEMPLATES) {
       onSelectStyle(`template-${num}`);
       setDirectJumpNumber('');
+      setJumpError(null);
       onClose();
     } else {
-      alert('Please enter a template number between 1 and 1000');
+      setJumpError('Enter #1-1000');
+      setTimeout(() => setJumpError(null), 3000);
     }
   };
 
@@ -116,7 +120,7 @@ export function StylesModal({
 
           <div className="flex items-center gap-2">
             {/* Quick jump to template # */}
-            <form onSubmit={handleDirectJump} className="flex items-center gap-1 bg-white p-1 rounded-lg border border-stone-300">
+            <form onSubmit={handleDirectJump} className="relative flex items-center gap-1 bg-white p-1 rounded-lg border border-stone-300">
               <input
                 type="number"
                 min="1"
@@ -132,6 +136,11 @@ export function StylesModal({
               >
                 Go
               </button>
+              {jumpError && (
+                <span className="absolute -bottom-6 left-0 text-[10px] text-red-600 font-medium whitespace-nowrap bg-red-50 px-1.5 py-0.5 rounded border border-red-200">
+                  {jumpError}
+                </span>
+              )}
             </form>
 
             <button

@@ -364,10 +364,12 @@ export function CVPreview({ data }: CVPreviewProps) {
             >
               {/* Profile image in top left of sidebar */}
               <div className="flex flex-col items-center text-center pb-3 border-b border-white/20">
-                {renderAvatar('w-26 h-26 sm:w-30 sm:h-30 mb-2.5 border-3 border-white/35 shadow-lg')}
-                <div className="text-white/80 text-[11px] font-mono tracking-wider uppercase mt-1">
-                  #{styleConfig.number} {styleConfig.name}
-                </div>
+                {renderAvatar('w-26 h-26 sm:w-30 sm:h-30 mb-2 border-3 border-white/35 shadow-lg')}
+                {job && (
+                  <div className="text-white/95 text-xs font-semibold tracking-wide mt-1 text-center max-w-[200px] break-words">
+                    {job}
+                  </div>
+                )}
               </div>
 
               {/* Contact Details in Colored Left Sidebar */}
@@ -403,11 +405,6 @@ export function CVPreview({ data }: CVPreviewProps) {
                 <div id="cvLanguages" className="text-white leading-relaxed">
                   {renderLanguages(true)}
                 </div>
-              </div>
-
-              {/* Sidebar bottom indicator */}
-              <div className="pt-4 border-t border-white/20 text-[11px] text-white/70">
-                <span>Standard A4 Single-Page Profile</span>
               </div>
             </div>
 
@@ -448,12 +445,6 @@ export function CVPreview({ data }: CVPreviewProps) {
                 <h2 className={sectionHeadingClass}>EDUCATION</h2>
                 {renderEducationSection()}
               </div>
-
-              {/* Footer watermark */}
-              <div className="pt-4 border-t border-stone-100 flex items-center justify-between text-[11px] text-stone-400 mt-4">
-                <span>CV Style #{styleConfig.number}: {styleConfig.name}</span>
-                <span className="no-print">Formatted for A4 Single-Page PDF</span>
-              </div>
             </div>
           </div>
         </div>
@@ -485,14 +476,9 @@ export function CVPreview({ data }: CVPreviewProps) {
               <div className="flex flex-col items-center text-center gap-3">
                 {renderAvatar()}
                 <div>
-                  <div className="flex items-center justify-center gap-2">
-                    <h1 id="cvName" className={`${density.nameFontSize} tracking-tight ${activeColor.headerText}`}>
-                      {name || <span className="opacity-50">Your Name</span>}
-                    </h1>
-                    <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-black/25 text-white/80 border border-white/20">
-                      #{styleConfig.number}
-                    </span>
-                  </div>
+                  <h1 id="cvName" className={`${density.nameFontSize} tracking-tight ${activeColor.headerText}`}>
+                    {name || <span className="opacity-50">Your Name</span>}
+                  </h1>
                   <h3 id="cvJob" className={`${density.jobTitleFontSize} mt-1 tracking-wider uppercase ${activeColor.headerJob}`}>
                     {job || <span className="opacity-50">Your Job Title</span>}
                   </h3>
@@ -549,14 +535,9 @@ export function CVPreview({ data }: CVPreviewProps) {
                       verticalAlign: 'middle',
                     }}
                   >
-                    <div className="flex items-center gap-2">
-                      <h1 id="cvName" className={`${density.nameFontSize} tracking-tight ${activeColor.headerText}`}>
-                        {name || <span className="opacity-50">Your Name</span>}
-                      </h1>
-                      <span className="hidden sm:inline-block text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-black/25 text-white/80 border border-white/20">
-                        #{styleConfig.number}
-                      </span>
-                    </div>
+                    <h1 id="cvName" className={`${density.nameFontSize} tracking-tight ${activeColor.headerText}`}>
+                      {name || <span className="opacity-50">Your Name</span>}
+                    </h1>
                     <h3 id="cvJob" className={`${density.jobTitleFontSize} mt-1 tracking-wider uppercase ${activeColor.headerJob}`}>
                       {job || <span className="opacity-50">Your Job Title</span>}
                     </h3>
@@ -857,12 +838,6 @@ export function CVPreview({ data }: CVPreviewProps) {
               </div>
             </div>
           )}
-        </div>
-
-        {/* Footer print-safe watermark */}
-        <div className="px-6 py-3 border-t border-stone-100 flex items-center justify-between text-[11px] text-stone-400">
-          <span>CV Style #{styleConfig.number}: {styleConfig.name} ({layout}, {photoPosition} photo)</span>
-          <span className="no-print">Formatted for A4 Single-Page PDF ({density.level})</span>
         </div>
       </div>
     </div>

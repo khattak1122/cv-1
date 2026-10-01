@@ -418,38 +418,44 @@ English (Professional Working)`,
   },
   {
     id: 'warehouse-worker',
-    title: 'Warehouse Worker & Forklift Operator',
+    title: 'Warehouse Inventory Sided Forklift Operator',
     category: 'Logistics',
     data: {
-      name: 'Imran Khan',
-      job: 'Warehouse Inventory Associate & Forklift Operator',
-      phone: '+966 54 887 6655',
-      email: 'imran.warehouse@logistics.sa',
-      location: 'Jeddah, Saudi Arabia',
-      photoUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&h=300&q=80',
-      about: 'Energetic and certified Counterbalance & Reach Truck Forklift Operator with 6+ years in fast-paced fulfillment centers. Expert in pallet racking, RF barcode scanning, order picking, staging, and inventory cycle counting in WMS environments.',
-      education: `Certified Forklift Operator License (OSHA Compliant)
-Heavy Equipment Safety Institute | 2019
+      name: 'Muhammad Faisal',
+      job: 'Warehouse Inventory Sided Forklift Operator',
+      phone: '+966 50 123 4567',
+      email: 'muhammad.faisal@example.com',
+      location: 'Riyadh, Saudi Arabia',
+      photoUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&h=300&q=80',
+      about: 'Certified Counterbalance & Reach Truck Sided Forklift Operator with 6+ years of heavy inventory and fulfillment experience across Saudi Arabia and the GCC. Expert in high-bay pallet racking, precision staging, RF barcode scanning, inventory cycle counts, and OSHA-compliant warehouse safety management.',
+      education: `Certified Forklift Operator & Heavy Equipment Safety License
+Saudi Logistics & Vocational Training Institute | 2019
 
-Secondary School Certificate
-Government High School, Karak | 2017`,
-      experience: `Senior Forklift Operator & Inventory Specialist
-Amazon Fulfillment Center, Jeddah
-2021 - Present
-• Operate stand-up reach trucks and electric pallet jacks in 12-meter high-bay racking systems with 99.8% pick accuracy.
-• Unload and inspect 15+ container shipments daily, cross-referencing shipping manifests and pallet tags using SAP WMS.
-• Maintained a 100% clean safety record across 4,000+ operating hours.`,
-      skills: `Counterbalance & Reach Truck Forklifts
-RF Barcode Scanners & WMS (SAP / Manhattan)
-Order Picking, Packing & Pallet Wrapping
-Inventory Cycle Counting & Auditing
-FIFO (First-In, First-Out) Stock Rotation
-Shipping & Receiving Manifest Verification
-Warehouse Safety & Hazard Identification`,
-      languages: `Pashto (Native)
-Urdu (Fluent)
-English (Conversational)
-Arabic (Basic)`,
+High School Diploma (General Science)
+Federal Board of Intermediate & Secondary Education | 2017`,
+      experience: `Senior Sided Forklift Operator & Warehouse Inventory Lead
+Al-Rashid Global Logistics & Distribution Hub, Riyadh
+2022 - Present
+• Operates specialized high-rack sided reach forklifts and turret trucks across 12-meter high-bay storage aisles with zero accidents.
+• Manages daily receipt and dispatch of 45+ truckloads, executing RF barcode scanning and SAP WMS inventory tracking with 99.9% accuracy.
+• Leads a team of 14 warehouse associates during peak fulfillment shifts, accelerating staging throughput by 22%.
+
+Warehouse Material Handler & Equipment Operator
+Gulf Express Fulfillment & Supply Chain, Jeddah
+2019 - 2022
+• Handled heavy pallet replenishment, cross-docking, and container unloading using 3-ton counterbalance forklifts.
+• Conducted daily pre-shift OSHA vehicle inspections, hydraulic fluid checks, and battery recharging protocols.`,
+      skills: `Sided Reach Trucks & Turret Forklifts
+Counterbalance Forklifts (Gas & Electric)
+SAP Warehouse Management System (WMS)
+RF Barcode Scanning & Staging
+Pallet Racking & High-Bay Stacking
+FIFO Inventory & Cycle Audits
+OSHA Warehouse Safety & Hazard Control
+Container Loading & Unloading`,
+      languages: `English (Fluent / Professional)
+Arabic (Working Proficiency)
+Urdu (Native)`,
       recommendedTemplate: 'template-1',
     },
   },
@@ -531,7 +537,7 @@ Arabic (Conversational)`,
       phone: '+966 50 123 4567',
       email: 'muhammad.faisal@example.com',
       location: 'Karak, KPK, Pakistan',
-      photoUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&h=300&q=80',
+      photoUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&h=300&q=80',
       about: 'Licensed Civil Engineer with 5+ years of infrastructure and structural construction experience across Saudi Arabia, Pakistan, and the GCC. Skilled in directing multimillion-dollar high-rise developments, site safety inspections, subcontractor management, and strict enforcement of the Saudi Building Code (SBC) and ASTM standards.',
       education: `BS in Civil & Environmental Engineering
 King Saud University, Riyadh
